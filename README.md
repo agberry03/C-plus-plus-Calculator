@@ -21,7 +21,7 @@
 {Make a list of websites that you found helpful in this project}
 
 - [W3 Schools C++ Tutorial](https://www.w3schools.com/cpp/default.asp)
-- [Web Site Name](http://url.link.goes.here)
+- [C++ rand function](https://cplusplus.com/reference/cstdlib/rand/)
 
 # Future Work
 
