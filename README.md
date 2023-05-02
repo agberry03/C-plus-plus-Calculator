@@ -22,6 +22,8 @@
 
 - [W3 Schools C++ Tutorial](https://www.w3schools.com/cpp/default.asp)
 - [C++ rand function](https://cplusplus.com/reference/cstdlib/rand/)
+- [C++ rand and srand function](https://www.geeksforgeeks.org/rand-and-srand-in-ccpp/)
+- [Virtual Methods and Abstract Classes in C++](https://www.geeksforgeeks.org/pure-virtual-functions-and-abstract-classes/)
 
 # Future Work
 

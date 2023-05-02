@@ -1,9 +1,6 @@
-#include <stdlib.h>
 #include <iostream>
+#include <cstdlib>
 using namespace std;
-class Main {
-
-};
 
 class MathProblem
 {
@@ -15,33 +12,69 @@ private:
 public:
     MathProblem()
     {
-        SetNumbers();
-    }
-    static int GetRandomNum(int maxNum, int initNum = 1)
-    {
-        return rand() % maxNum + initNum;
-    }
-    void SetNumbers()
-    {
-        int maxNum = 9;
+        int maxNum = 10;
         firstNum = GetRandomNum(maxNum);
         secondNum = GetRandomNum(maxNum);
+        answer = SetAnswer(firstNum, secondNum);
     }
-    void SetAdditionAnswer()
+    static int GetRandomNum(int maxNum)
     {
-        answer = firstNum + secondNum;
+        return rand() % maxNum;
     }
-    void DisplayAdditionProblem()
+    int GetFirstNum()
     {
-       // cout << firstNum << " + " << lastNum << " = ";
+        return firstNum;
     }
-    int GetProblemAnswer(int firstNum, int lastNum)
+    int GetSecondNum()
     {
+        return secondNum;
+    }
+    int GetAnswer()
+    {
+        return answer;
+    }
+    virtual void DisplayProblem(){};
+    virtual int SetAnswer(int firstNum, int secondNum){};
+};
+
+class AdditionProblem : public MathProblem
+{
+public:
+    using MathProblem ::MathProblem;
+    int SetAnswer(int firstNum, int secondNum) override
+    {
+        return firstNum + secondNum;
+    }
+    void DisplayProblem()
+    {
+        cout << GetFirstNum() << " + " << GetSecondNum() << " = " << GetAnswer();
     }
 };
 
-class AdditionProblem: public MathProblem {
-    
+class SubtractionProblem : public MathProblem
+{
+public:
+    int SetAnswer(int firstNum, int secondNum)
+    {
+        return firstNum - secondNum;
+    }
+    void DisplayProblem()
+    {
+        cout << GetFirstNum() << " - " << GetSecondNum() << " = " << GetAnswer();
+    }
+};
+
+class MultiplicationProblem : public MathProblem
+{
+public:
+    int SetAnswer(int firstNum, int secondNum)
+    {
+        return firstNum + secondNum;
+    }
+    void DisplayProblem()
+    {
+        cout << GetFirstNum() << " * " << GetSecondNum() << " = " << GetAnswer() << "\n";
+    }
 };
 
 class CoutHandler
@@ -52,11 +85,21 @@ public:
     {
         for (int i = 0; i < problemNum; i++)
         {
-            
         }
     }
 };
 
-class CintHandler {
+class CintHandler
+{
+};
 
+int main()
+{
+    srand(time(0));
+
+    AdditionProblem addprob;
+
+    addprob.DisplayProblem();
+
+    return 0;
 };
