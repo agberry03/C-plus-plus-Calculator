@@ -77,6 +77,7 @@ public:
     }
 };
 
+// Output handler.
 class CoutHandler
 {
 
@@ -89,16 +90,20 @@ public:
     }
 };
 
+// Input handler.
 class CintHandler
 {
 };
 
 int main()
 {
+    // Assign seed.
     srand(time(0));
 
+    // Create example problem.
     AdditionProblem addprob;
 
+    // Display example problem.
     addprob.DisplayProblem();
 
     return 0;
