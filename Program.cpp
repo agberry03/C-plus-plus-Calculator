@@ -5,21 +5,19 @@ using namespace std;
 class MathProblem
 {
 private:
-    int answer;
     int firstNum;
     int secondNum;
 
 public:
     MathProblem()
     {
-        int maxNum = 10;
+        int maxNum = 9;
         firstNum = GetRandomNum(maxNum);
         secondNum = GetRandomNum(maxNum);
-        answer = SetAnswer(firstNum, secondNum);
     }
     static int GetRandomNum(int maxNum)
     {
-        return rand() % maxNum;
+        return (rand() % maxNum) + 1;
     }
     int GetFirstNum()
     {
@@ -29,51 +27,56 @@ public:
     {
         return secondNum;
     }
-    int GetAnswer()
-    {
-        return answer;
-    }
     virtual void DisplayProblem(){};
-    virtual int SetAnswer(int firstNum, int secondNum){};
+    virtual int GetAnswer(int firstNum, int secondNum){};
 };
 
 class AdditionProblem : public MathProblem
 {
 public:
     using MathProblem ::MathProblem;
-    int SetAnswer(int firstNum, int secondNum) override
+    int GetAnswer(int firstNum, int secondNum) override
     {
         return firstNum + secondNum;
     }
     void DisplayProblem()
     {
-        cout << GetFirstNum() << " + " << GetSecondNum() << " = " << GetAnswer();
+        int first = GetFirstNum();
+        int second = GetSecondNum();
+        int answer = GetAnswer(first, second);
+        cout << first << " + " << second << " = " << answer;
     }
 };
 
 class SubtractionProblem : public MathProblem
 {
 public:
-    int SetAnswer(int firstNum, int secondNum)
+    int GetAnswer(int firstNum, int secondNum) override
     {
         return firstNum - secondNum;
     }
     void DisplayProblem()
     {
-        cout << GetFirstNum() << " - " << GetSecondNum() << " = " << GetAnswer();
+        int first = GetFirstNum();
+        int second = GetSecondNum();
+        int answer = GetAnswer(first, second);
+        cout << first << " - " << second << " = " << answer;
     }
 };
 
 class MultiplicationProblem : public MathProblem
 {
 public:
-    int SetAnswer(int firstNum, int secondNum)
+    int GetAnswer(int firstNum, int secondNum) override
     {
-        return firstNum + secondNum;
+        return firstNum * secondNum;
     }
     void DisplayProblem()
     {
-        cout << GetFirstNum() << " * " << GetSecondNum() << " = " << GetAnswer() << "\n";
+        int first = GetFirstNum();
+        int second = GetSecondNum();
+        int answer = GetAnswer(first, second);
+        cout << first << " * " << second << " = " << answer;
     }
 };
 
@@ -102,9 +105,14 @@ int main()
 
     // Create example problem.
     AdditionProblem addprob;
+    SubtractionProblem subprob;
+    MultiplicationProblem multiprob;
 
     // Display example problem.
     addprob.DisplayProblem();
-
+    cout << "\n";
+    subprob.DisplayProblem();
+    cout << "\n";
+    multiprob.DisplayProblem();
     return 0;
 };
