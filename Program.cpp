@@ -27,6 +27,12 @@ public:
     {
         return secondNum;
     }
+    bool IsAnswerCorrect(int answer)
+    {
+        int first = GetFirstNum();
+        int second = GetSecondNum();
+        return answer == GetAnswer(first, second);
+    }
     virtual void DisplayProblem(){};
     virtual int GetAnswer(int firstNum, int secondNum){};
 };
@@ -39,12 +45,13 @@ public:
     {
         return firstNum + secondNum;
     }
+
     void DisplayProblem()
     {
         int first = GetFirstNum();
         int second = GetSecondNum();
         int answer = GetAnswer(first, second);
-        cout << first << " + " << second << " = " << answer;
+        cout << first << " + " << second << " = ";
     }
 };
 
@@ -60,7 +67,7 @@ public:
         int first = GetFirstNum();
         int second = GetSecondNum();
         int answer = GetAnswer(first, second);
-        cout << first << " - " << second << " = " << answer;
+        cout << first << " - " << second << " = ";
     }
 };
 
@@ -75,8 +82,7 @@ public:
     {
         int first = GetFirstNum();
         int second = GetSecondNum();
-        int answer = GetAnswer(first, second);
-        cout << first << " * " << second << " = " << answer;
+        cout << first << " * " << second << " = ";
     }
 };
 
@@ -94,8 +100,15 @@ public:
 };
 
 // Input handler.
-class CintHandler
+class CinHandler
 {
+public:
+    static int EnterAnswer()
+    {
+        int answer;
+        cin >> answer;
+        return answer;
+    }
 };
 
 int main()
@@ -107,12 +120,41 @@ int main()
     AdditionProblem addprob;
     SubtractionProblem subprob;
     MultiplicationProblem multiprob;
+    CinHandler cinhandler;
 
-    // Display example problem.
+    // Display example problems.
     addprob.DisplayProblem();
-    cout << "\n";
+    int answer = cinhandler.EnterAnswer();
+    if (addprob.IsAnswerCorrect(answer))
+    {
+        cout << "correct!\n";
+    }
+    else
+    {
+        cout << "incorrect\n";
+    }
+
     subprob.DisplayProblem();
-    cout << "\n";
+    answer = cinhandler.EnterAnswer();
+    if (subprob.IsAnswerCorrect(answer))
+    {
+        cout << "correct!\n";
+    }
+    else
+    {
+        cout << "incorrect\n";
+    }
+
     multiprob.DisplayProblem();
+    answer = cinhandler.EnterAnswer();
+    if (multiprob.IsAnswerCorrect(answer))
+    {
+        cout << "correct!\n";
+    }
+    else
+    {
+        cout << "incorrect\n";
+    }
+
     return 0;
 };
