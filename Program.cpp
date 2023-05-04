@@ -2,6 +2,13 @@
 #include <cstdlib>
 using namespace std;
 
+// Functions
+static int GetRandomNum(int maxNum)
+{
+    return (rand() % maxNum) + 1;
+}
+
+// Classes
 class MathProblem
 {
 private:
@@ -14,10 +21,6 @@ public:
         int maxNum = 9;
         firstNum = GetRandomNum(maxNum);
         secondNum = GetRandomNum(maxNum);
-    }
-    static int GetRandomNum(int maxNum)
-    {
-        return (rand() % maxNum) + 1;
     }
     int GetFirstNum()
     {
@@ -85,20 +88,6 @@ public:
         cout << first << " * " << second << " = ";
     }
 };
-
-// Output handler.
-class CoutHandler
-{
-
-public:
-    void DisplayProblems(int problemNum)
-    {
-        for (int i = 0; i < problemNum; i++)
-        {
-        }
-    }
-};
-
 // Input handler.
 class CinHandler
 {
@@ -110,50 +99,98 @@ public:
         return answer;
     }
 };
+// Output handler.
+class CoutHandler
+{
+public:
+    void DisplayAdditionProblems(int problemNum)
+    {
+        CinHandler cinhandler;
+        AdditionProblem problems[problemNum];
+        for (int i = 0; i < problemNum; i++)
+        {
+            problems[i].DisplayProblem();
+            int answer = cinhandler.EnterAnswer();
+            if (problems[i].IsAnswerCorrect(answer))
+            {
+                cout << "correct!\n";
+            }
+            else
+            {
+                cout << "incorrect\n";
+            }
+        }
+    }
+    void DisplaySubtractionProblems(int problemNum)
+    {
+        CinHandler cinhandler;
+        SubtractionProblem problems[problemNum];
+        for (int i = 0; i < problemNum; i++)
+        {
+            problems[i].DisplayProblem();
+            int answer = cinhandler.EnterAnswer();
+            if (problems[i].IsAnswerCorrect(answer))
+            {
+                cout << "correct!\n";
+            }
+            else
+            {
+                cout << "incorrect\n";
+            }
+        }
+    }
+    void DisplayMultiplicationProblems(int problemNum)
+    {
+        CinHandler cinhandler;
+        MultiplicationProblem problems[problemNum];
+        for (int i = 0; i < problemNum; i++)
+        {
+            problems[i].DisplayProblem();
+            int answer = cinhandler.EnterAnswer();
+            if (problems[i].IsAnswerCorrect(answer))
+            {
+                cout << "correct!\n";
+            }
+            else
+            {
+                cout << "incorrect\n";
+            }
+        }
+    }
+};
 
+// Main
 int main()
 {
     // Assign seed.
     srand(time(0));
 
-    // Create example problem.
-    AdditionProblem addprob;
-    SubtractionProblem subprob;
-    MultiplicationProblem multiprob;
+    // cin handler
     CinHandler cinhandler;
+    // cout handler
+    CoutHandler couthandler;
 
-    // Display example problems.
-    addprob.DisplayProblem();
-    int answer = cinhandler.EnterAnswer();
-    if (addprob.IsAnswerCorrect(answer))
-    {
-        cout << "correct!\n";
-    }
-    else
-    {
-        cout << "incorrect\n";
-    }
+    // Input for number of problems
+    cout << "How many problems would you like to solve? ";
+    int numberProblems = cinhandler.EnterAnswer();
 
-    subprob.DisplayProblem();
-    answer = cinhandler.EnterAnswer();
-    if (subprob.IsAnswerCorrect(answer))
-    {
-        cout << "correct!\n";
-    }
-    else
-    {
-        cout << "incorrect\n";
-    }
+    // Input for type of problems
+    cout << "What type of problems will you solve? (1-Addition, 2-Subtraction, 3-Multiplication) ";
+    int problemType = cinhandler.EnterAnswer();
 
-    multiprob.DisplayProblem();
-    answer = cinhandler.EnterAnswer();
-    if (multiprob.IsAnswerCorrect(answer))
+    switch (problemType)
     {
-        cout << "correct!\n";
-    }
-    else
-    {
-        cout << "incorrect\n";
+    case 1:
+        couthandler.DisplayAdditionProblems(numberProblems);
+        break;
+    case 2:
+        couthandler.DisplaySubtractionProblems(numberProblems);
+        break;
+    case 3:
+        couthandler.DisplayMultiplicationProblems(numberProblems);
+        break;
+    default:
+        cout << "invalid number!";
     }
 
     return 0;
