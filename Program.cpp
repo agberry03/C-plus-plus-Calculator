@@ -1,20 +1,23 @@
-#include <iostream>
-#include <cstdlib>
-using namespace std;
+#include <iostream>  // Read and write to input/output streams.
+#include <cstdlib>   // Use rand and srand.
+using namespace std; // Use strings.
 
-// Functions
+// Get a random integer from 1 to maxNum.
 static int GetRandomNum(int maxNum)
 {
     return (rand() % maxNum) + 1;
 }
+// Get an integer inputed by the user.
 static int EnterAnswer()
-    {
-        int answer;
-        cin >> answer;
-        return answer;
-    }
+{
+    int answer;
+    cin >> answer;
+    return answer;
+}
 
 // Classes
+// The generic MathProblem class.
+// Attributes: firstNum, secondNum, values are randomly determined integers from 1-9.
 class MathProblem
 {
 private:
@@ -28,32 +31,35 @@ public:
         firstNum = GetRandomNum(maxNum);
         secondNum = GetRandomNum(maxNum);
     }
+    // Return the firstNum's value.
     int GetFirstNum()
     {
         return firstNum;
     }
+    // Return the secondNum's value.
     int GetSecondNum()
     {
         return secondNum;
     }
+    // If the answer == firstNum +/-/* secondNum, return true bool. Otherwise return false.
     bool IsAnswerCorrect(int answer)
     {
         int first = GetFirstNum();
         int second = GetSecondNum();
         return answer == GetAnswer(first, second);
     }
+    
+    // Display "firstNum +/-/* secondNum = " to the user.
     virtual void DisplayProblem(){};
+    // Return the value of firstNum and secondNum when operated on together.
     virtual int GetAnswer(int firstNum, int secondNum){};
 };
 
+// Child of MathProblem, used for addition problems.
 class AdditionProblem : public MathProblem
 {
 public:
     using MathProblem ::MathProblem;
-    int GetAnswer(int firstNum, int secondNum) override
-    {
-        return firstNum + secondNum;
-    }
 
     void DisplayProblem()
     {
@@ -62,15 +68,15 @@ public:
         int answer = GetAnswer(first, second);
         cout << first << " + " << second << " = ";
     }
+    int GetAnswer(int firstNum, int secondNum) override
+    {
+        return firstNum + secondNum;
+    }
 };
-
+// Child of MathProblem, used for subtraction problems.
 class SubtractionProblem : public MathProblem
 {
 public:
-    int GetAnswer(int firstNum, int secondNum) override
-    {
-        return firstNum - secondNum;
-    }
     void DisplayProblem()
     {
         int first = GetFirstNum();
@@ -78,31 +84,30 @@ public:
         int answer = GetAnswer(first, second);
         cout << first << " - " << second << " = ";
     }
+    int GetAnswer(int firstNum, int secondNum) override
+    {
+        return firstNum - secondNum;
+    }
 };
-
+// Child of MathProblem, used for multiplication problems.
 class MultiplicationProblem : public MathProblem
 {
 public:
-    int GetAnswer(int firstNum, int secondNum) override
-    {
-        return firstNum * secondNum;
-    }
     void DisplayProblem()
     {
         int first = GetFirstNum();
         int second = GetSecondNum();
         cout << first << " * " << second << " = ";
     }
+    int GetAnswer(int firstNum, int secondNum) override
+    {
+        return firstNum * secondNum;
+    }
 };
 
-// Output handler.
-class CoutHandler
-{
-public:
-    void DisplayAdditionProblems(int problemNum)
+static void DisplayMathProblems(MathProblem problems[50])
     {
-        AdditionProblem problems[problemNum];
-        for (int i = 0; i < problemNum; i++)
+        for (int i = 0; i < sizeof(problems); i++)
         {
             problems[i].DisplayProblem();
             int answer = EnterAnswer();
@@ -112,45 +117,10 @@ public:
             }
             else
             {
-                cout << "incorrect\n";
+                cout << "incorrect.\n";
             }
         }
     }
-    void DisplaySubtractionProblems(int problemNum)
-    {
-        SubtractionProblem problems[problemNum];
-        for (int i = 0; i < problemNum; i++)
-        {
-            problems[i].DisplayProblem();
-            int answer = EnterAnswer();
-            if (problems[i].IsAnswerCorrect(answer))
-            {
-                cout << "correct!\n";
-            }
-            else
-            {
-                cout << "incorrect\n";
-            }
-        }
-    }
-    void DisplayMultiplicationProblems(int problemNum)
-    {
-        MultiplicationProblem problems[problemNum];
-        for (int i = 0; i < problemNum; i++)
-        {
-            problems[i].DisplayProblem();
-            int answer = EnterAnswer();
-            if (problems[i].IsAnswerCorrect(answer))
-            {
-                cout << "correct!\n";
-            }
-            else
-            {
-                cout << "incorrect\n";
-            }
-        }
-    }
-};
 
 // Main
 int main()
@@ -158,10 +128,7 @@ int main()
     // Assign seed.
     srand(time(0));
 
-    // cout handler
-    CoutHandler couthandler;
-
-    // Input for number of problems
+    // Input for number of problems.
     cout << "How many problems would you like to solve? ";
     int numberProblems = EnterAnswer();
 
@@ -169,20 +136,28 @@ int main()
     cout << "What type of problems will you solve? (1-Addition, 2-Subtraction, 3-Multiplication) ";
     int problemType = EnterAnswer();
 
-    switch (problemType)
+    if (problemType == 1)
     {
-    case 1:
-        couthandler.DisplayAdditionProblems(numberProblems);
-        break;
-    case 2:
-        couthandler.DisplaySubtractionProblems(numberProblems);
-        break;
-    case 3:
-        couthandler.DisplayMultiplicationProblems(numberProblems);
-        break;
-    default:
+        // Initialize addition problem list.
+        AdditionProblem problems[numberProblems];
+        DisplayMathProblems(problems);
+    }
+    else if (problemType == 2)
+    {
+        // Initialize subtraction problem list.
+        SubtractionProblem problems[numberProblems];
+        DisplayMathProblems(problems);
+    }
+    else if (problemType == 3)
+    {
+        // Initialize multiplication problem list.
+        MultiplicationProblem problems[numberProblems];
+        DisplayMathProblems(problems);
+    }
+    else
+    {
         cout << "invalid number!";
     }
-
+    
     return 0;
 };
