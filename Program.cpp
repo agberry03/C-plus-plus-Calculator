@@ -7,6 +7,12 @@ static int GetRandomNum(int maxNum)
 {
     return (rand() % maxNum) + 1;
 }
+static int EnterAnswer()
+    {
+        int answer;
+        cin >> answer;
+        return answer;
+    }
 
 // Classes
 class MathProblem
@@ -88,29 +94,18 @@ public:
         cout << first << " * " << second << " = ";
     }
 };
-// Input handler.
-class CinHandler
-{
-public:
-    static int EnterAnswer()
-    {
-        int answer;
-        cin >> answer;
-        return answer;
-    }
-};
+
 // Output handler.
 class CoutHandler
 {
 public:
     void DisplayAdditionProblems(int problemNum)
     {
-        CinHandler cinhandler;
         AdditionProblem problems[problemNum];
         for (int i = 0; i < problemNum; i++)
         {
             problems[i].DisplayProblem();
-            int answer = cinhandler.EnterAnswer();
+            int answer = EnterAnswer();
             if (problems[i].IsAnswerCorrect(answer))
             {
                 cout << "correct!\n";
@@ -123,12 +118,11 @@ public:
     }
     void DisplaySubtractionProblems(int problemNum)
     {
-        CinHandler cinhandler;
         SubtractionProblem problems[problemNum];
         for (int i = 0; i < problemNum; i++)
         {
             problems[i].DisplayProblem();
-            int answer = cinhandler.EnterAnswer();
+            int answer = EnterAnswer();
             if (problems[i].IsAnswerCorrect(answer))
             {
                 cout << "correct!\n";
@@ -141,12 +135,11 @@ public:
     }
     void DisplayMultiplicationProblems(int problemNum)
     {
-        CinHandler cinhandler;
         MultiplicationProblem problems[problemNum];
         for (int i = 0; i < problemNum; i++)
         {
             problems[i].DisplayProblem();
-            int answer = cinhandler.EnterAnswer();
+            int answer = EnterAnswer();
             if (problems[i].IsAnswerCorrect(answer))
             {
                 cout << "correct!\n";
@@ -165,18 +158,16 @@ int main()
     // Assign seed.
     srand(time(0));
 
-    // cin handler
-    CinHandler cinhandler;
     // cout handler
     CoutHandler couthandler;
 
     // Input for number of problems
     cout << "How many problems would you like to solve? ";
-    int numberProblems = cinhandler.EnterAnswer();
+    int numberProblems = EnterAnswer();
 
     // Input for type of problems
     cout << "What type of problems will you solve? (1-Addition, 2-Subtraction, 3-Multiplication) ";
-    int problemType = cinhandler.EnterAnswer();
+    int problemType = EnterAnswer();
 
     switch (problemType)
     {
