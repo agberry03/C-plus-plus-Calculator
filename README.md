@@ -1,10 +1,13 @@
 # Overview
 
-{Important! Do not say in this section that this is college assignment. Talk about what you are trying to accomplish as a software engineer to further your learning.}
+In this project, I am trying to learn the basics of the C++ language.
 
-{Provide a description of the software that you wrote to demonstrate the C++ language.}
+To do so, I wrote a simple math program that calculates the answers to randomized
+math problems, gets the user's answer, and compares the two. It runs this in a loop for however
+many problems the user requests. The program will output "correct!" or "incorrect." depending on if the calculated answer and the user's answer match.
 
-{Describe your purpose for writing this software.}
+My purpose for writing this program is to get a better handle on how programming with C++ works,
+while still providing a decent challenge.
 
 {Provide a link to your YouTube demonstration. It should be a 4-5 minute demo of the software running and a walkthrough of the code. Focus should be on sharing what you learned about the language syntax.}
 
@@ -12,9 +15,10 @@
 
 # Development Environment
 
-{Describe the tools that you used to develop the software}
+I used the Visual Studio Code IDE.
 
-{Describe the programming language that you used and any libraries.}
+I used the C++ programming language and the C/C++ IntelliSense extension.
+I also used the Prettier extension to quickly edit the spacing of code.
 
 # Useful Websites
 
@@ -29,6 +33,7 @@
 
 {Make a list of things that you need to fix, improve, and add in the future.}
 
-- Item 1
-- Item 2
-- Item 3
+- Add the ability to track how many answers the user got right.
+- Make it so the program can give the user a variety of problems, instead of only one type at a time.
+- Find a way to make it so the DisplayMathProblems function doesn't have to pause after displaying the last problem.
+- Make the DisplayProblem methods in each child of MathProblem less repetitive.
