@@ -9,9 +9,7 @@ many problems the user requests. The program will output "correct!" or "incorrec
 My purpose for writing this program is to get a better handle on how programming with C++ works,
 while still providing a decent challenge.
 
-{Provide a link to your YouTube demonstration. It should be a 4-5 minute demo of the software running and a walkthrough of the code. Focus should be on sharing what you learned about the language syntax.}
-
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://www.youtube.com/watch?v=thRMieEWaEs)
 
 # Development Environment
 
