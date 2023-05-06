@@ -66,7 +66,6 @@ public:
     {
         int first = GetFirstNum();
         int second = GetSecondNum();
-        int answer = GetAnswer(first, second);
         cout << first << " + " << second << " = ";
     }
     int GetAnswer(int firstNum, int secondNum) override
